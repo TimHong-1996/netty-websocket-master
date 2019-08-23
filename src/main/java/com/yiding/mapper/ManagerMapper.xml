@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiding.dao.ManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.yiding.pojo.Manager" >
+    <id column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="manager_name" property="managerName" jdbcType="VARCHAR" />
+    <result column="manager_password" property="managerPassword" jdbcType="VARCHAR" />
+    <result column="manager_power" property="managerPower" jdbcType="TINYINT" />
+    <result column="manager_create_time" property="managerCreateTime" jdbcType="TIMESTAMP" />
+    <result column="manager_phone" property="managerPhone" jdbcType="VARCHAR" />
+    <result column="manager_display" property="managerDisplay" jdbcType="TINYINT" />
+    <result column="unname1" property="unname1" jdbcType="VARCHAR" />
+    <result column="unname2" property="unname2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    manager_id, manager_name, manager_power, manager_create_time, manager_phone,
+    manager_display, unname1, unname2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAllAdviserByVisitorID" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    m.manager_id, manager_name, manager_power, manager_create_time, manager_phone,
+    manager_display, unname1, unname2
+    from manager m , manager_visitor mv
+    where m.manager_display = 1 AND m.manager_id = mv.manager_id AND mv.visitor_id = #{visitorId,jdbcType=BIGINT}
+  </select>
+  <select id="login" resultMap="BaseResultMap" parameterType="com.yiding.pojo.Manager" >
+    select
+    <include refid="Base_Column_List" />
+    from manager
+    where manager_phone = #{managerPhone,jdbcType=VARCHAR} AND manager_password = #{managerPassword,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from manager
+    where manager_display = 1
+    <if test="xingming!=null">
+      AND manager_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    limit #{start} , #{size}
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer" >
+    select
+    COUNT(1)
+    from manager
+    where manager_display = 1
+    <if test="xingming!=null">
+      AND manager_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from manager
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yiding.pojo.Manager" >
+    insert into manager (manager_id, manager_name, manager_password, 
+      manager_power, manager_create_time, manager_phone, 
+      manager_display, unname1, unname2
+      )
+    values (#{managerId,jdbcType=BIGINT}, #{managerName,jdbcType=VARCHAR}, #{managerPassword,jdbcType=VARCHAR}, 
+      #{managerPower,jdbcType=TINYINT}, #{managerCreateTime,jdbcType=TIMESTAMP}, #{managerPhone,jdbcType=VARCHAR}, 
+      #{managerDisplay,jdbcType=TINYINT}, #{unname1,jdbcType=VARCHAR}, #{unname2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiding.pojo.Manager" >
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="managerName != null" >
+        manager_name,
+      </if>
+      <if test="managerPassword != null" >
+        manager_password,
+      </if>
+      <if test="managerPower != null" >
+        manager_power,
+      </if>
+      <if test="managerCreateTime != null" >
+        manager_create_time,
+      </if>
+      <if test="managerPhone != null" >
+        manager_phone,
+      </if>
+      <if test="managerDisplay != null" >
+        manager_display,
+      </if>
+      <if test="unname1 != null" >
+        unname1,
+      </if>
+      <if test="unname2 != null" >
+        unname2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="managerName != null" >
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null" >
+        #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPower != null" >
+        #{managerPower,jdbcType=TINYINT},
+      </if>
+      <if test="managerCreateTime != null" >
+        #{managerCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerPhone != null" >
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerDisplay != null" >
+        #{managerDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="unname1 != null" >
+        #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        #{unname2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiding.pojo.Manager" >
+    update manager
+    <set >
+      <if test="managerName != null" >
+        manager_name = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null" >
+        manager_password = #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPower != null" >
+        manager_power = #{managerPower,jdbcType=TINYINT},
+      </if>
+      <if test="managerCreateTime != null" >
+        manager_create_time = #{managerCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerPhone != null" >
+        manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerDisplay != null" >
+        manager_display = #{managerDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="unname1 != null" >
+        unname1 = #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        unname2 = #{unname2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiding.pojo.Manager" >
+    update manager
+    set manager_name = #{managerName,jdbcType=VARCHAR},
+      manager_password = #{managerPassword,jdbcType=VARCHAR},
+      manager_power = #{managerPower,jdbcType=TINYINT},
+      manager_create_time = #{managerCreateTime,jdbcType=TIMESTAMP},
+      manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      manager_display = #{managerDisplay,jdbcType=TINYINT},
+      unname1 = #{unname1,jdbcType=VARCHAR},
+      unname2 = #{unname2,jdbcType=VARCHAR}
+    where manager_id = #{managerId,jdbcType=BIGINT}
+  </update>
+</mapper>

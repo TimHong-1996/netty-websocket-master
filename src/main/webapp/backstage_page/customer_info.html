@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>客户表单</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+	<script type="text/javascript">
+//		function isDel() {
+//			swal({title:"您确定要删除这条信息吗",
+//				      text:"删除后将无法恢复，请谨慎操作！",
+//					  type:"warning",
+//					  showCancelButton:true,
+//					  confirmButtonColor:"#DD6B55",
+//					  confirmButtonText:"确定",
+//					  cancelButtonText:"取消",
+//					  closeOnConfirm:false,
+//					  closeOnCancel:false},
+//					  function(isConfirm){
+//						if(isConfirm){
+//							swal("删除成功！","您已经永久删除了这条信息。",
+//								 "success"
+//							)
+//						}else{
+//							swal("已取消",
+//							     "您取消了删除操作！","error"
+//							)
+//						}
+//					}
+//				)
+//		};
+	</script>
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        
+        <!-- Panel Other -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>公客户信息管理</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+          <div class="ibox-content">
+                <div class="row row-lg">
+                    
+
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+								<div style="margin-bottom:15px;border-bottom:1px solid #E7EAEC;padding-bottom:8px;">
+									<form id="searchForm">
+									<table>
+										<tr>
+											<th width="5%">
+												<span style="color:#000">姓名</span>
+											</th>
+											<td width="15%">
+												<input type="customName" class="form-control input-sm" name="customName" id="customName" placeholder="请输入">
+											</td>
+											<th width="5%">
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;性别</span>
+											</th>
+											<td  width="15%">
+												<select class="form-control input-sm"  name="customSex" id="customSex">
+													<option value="">请选择</option>
+													<option value="1">男</option>
+													<option value="0">女</option>
+												</select>
+											</td>
+											<th width="5%">
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;省份</span>
+											</th>
+											<td width="15%">
+												<input type="customName" class="form-control input-sm" name="customProvince" id="customProvince" placeholder="请输入">
+											</td>
+											<th width="5%">
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;城市</span>
+											</th>
+											<td width="15%">
+												<input type="customName" class="form-control input-sm" name="customCity" id="customCity" placeholder="请输入">
+											</td>
+											<th>
+												<span style="color:#000">来源</span>
+											</th>
+											<td>
+												<input type="customSource" class="form-control input-sm" name="customSource" id="customSource" placeholder="请输入">
+											</td>
+
+										</tr>
+										<tr>
+											<!--<th>-->
+												<!--<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;更新程度</span>-->
+											<!--</th>-->
+											<!--<td>-->
+												<!--<select class="form-control input-sm" name="customState" id="customState">-->
+													<!--<option value="">请选择</option>-->
+													<!--<option value="0">7天以内</option>-->
+													<!--<option value="1">7-15天</option>-->
+													<!--<option value="1">15天以上</option>-->
+												<!--</select>-->
+											<!--</td>-->
+											<th>
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;客户状态</span>
+											</th>
+											<td>
+												<select class="form-control input-sm" name="customDeal" id="customDeal">
+													<option value="">请选择</option>
+													<option value="0">未成交</option>
+													<option value="1">已成交</option>
+												</select>
+											</td>
+											<th>
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;排序</span>
+											</th>
+											<td>
+												<select class="form-control input-sm" name="sort" id="sort">
+													<option value="0">默认</option>
+													<option value="1">创建时间远到近</option>
+													<option value="2">创建时间近到远</option>
+													<option value="3">更新时间远到近</option>
+													<option value="4">更新时间近到远</option>
+												</select>
+											</td>
+											<td colspan="2">
+												<div class="btn-group hidden-xs pull-right" style="margin-top:5px;" id="exampleTableEventsToolbar" role="group">
+													<button type="button" class="btn btn-outline btn-default" onclick="getGongKeList(1)">
+														<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+														搜索
+													</button>
+													</div>
+											</td>
+										</tr>
+									</table>
+									</form>
+								</div>
+                                <table class="table table-bordered table-hover" 
+								       data-height="400"
+									   style="margin-bottom:0px"
+									   data-mobile-responsive="true">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>客户编号</th>
+                                            <th>客户名称</th>
+											<th>地区</th>
+											<th>电话</th>
+											<th>最新跟进</th>
+											<th>
+												<div align="center">操作</div>
+											</th>
+                                        </tr>
+                                    </thead>
+									<tbody id="dataList">
+										<tr>
+											<td>1</td>
+											<td>xxx</td>
+											<td>邵先生</td>
+											<td>北海</td>
+											<td>19902233454</td>
+											<td>xxxxxxx</td>
+											<td align="center">
+												<div>
+													<a href="edit_customer.html" title="修改">
+														<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+													</a>
+													&nbsp;&nbsp;
+													<a href="contacts.html" title="联系人" style="color:#CC6600">
+														<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+													</a>
+													&nbsp;&nbsp;
+													<a href="contact_record.html" title="跟进记录" style="color:#33cc00">
+														<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+													</a>
+													&nbsp;&nbsp;
+													<!--<a href="order_info.html" title="历史订单" style="color:#ff3300">
+														<i class="glyphicon glyphicon-time" aria-hidden="true"></i>
+													</a>-->
+													&nbsp;&nbsp;
+													<a onclick="isDel();" title="删除" style="color:#CC0000">
+														<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+													</a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+                                </table>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="pull-left" style="margin-top:15px">
+											<p id="listInfo">显示 1 到 10 项，共 57 项</p>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="pull-right">
+											<ul class="pagination" id="page" >
+												<li><a>&laquo;</a></li>
+												<li class="active"><a>1</a></li>
+												<li><a>2</a></li>
+												<li><a>3</a></li>
+												<li><a>4</a></li>
+												<li><a>5</a></li>
+												<li class="disabled"><a>&raquo;</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!--<script src="js/content.min.js?v=1.0.0"></script>-->
+	<script type="text/javascript" src="js/getrootpath.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/demo/bootstrap-table-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	<script type="text/javascript">
+        var pageP = 1 ;
+        getGongKeList(pageP);
+
+        function getGongKeList(page) {
+            $.ajax({
+                url:getRootPath() + "/backstage/selectCustomByPage",
+                data:{
+                    customName:$("#customName").val(),
+                    customSex:$("#customSex").val(),
+                    customProvince:$("#customProvince").val(),
+                    customCity:$("#customCity").val(),
+                    customSource:$("#customSource").val(),
+                    customState:$("#customState").val(),
+                    customDeal:$("#customDeal").val(),
+                    sort:$("#sort").val(),
+                    page:page,
+                    size:20
+                },
+                type: 'post',
+                dataType: 'json',
+//                timeout: 1000,
+//               beforeSend:function(){
+//                   var index = layer.load(1, {
+//                       shade: [0.35,'#052963'], //0.1透明度的白色背景
+//                       time:1000
+//                   });
+//               },
+                success: function (data) {
+                    console.log(data.data.list);
+                    if(data.code == 2000){
+                        $("#dataList").html("");
+                        var list = data.data.list;
+                        // layer.msg(data.message);
+                        for(var i = 0 ; i < list.length ; i++){
+                            pageP = page;
+                            var $tr=$("<tr><td>"+(i+1)+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].customId+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+(list[i].customName == null || list[i].customName == '' ? '未知': list[i].customName)+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+(list[i].customProvince == null || list[i].customProvince == '' ? '未知': list[i].customProvince)+" - "+ (list[i].customCity == null || list[i].customCity == '' ? '未知': list[i].customCity) +"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+(list[i].customPhone == null || list[i].customPhone == '' ? '未知': list[i].customPhone)+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+(list[i].customUpdateTime == null ? '暂无跟进' :list[i].customUpdateTime )+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td>"+(list[i].customDeal == 1 ? '已成交' :'未成交' )+"</td>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t<td align=\"center\">\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t<div>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"edit_customer.html?id="+list[i].customId+"\" id='update_a"+i+"' title=\"修改\">\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"detail_customer.html?id="+list[i].customId+"\" id='detail_a"+i+"' title=\"详情\" style=\"color:#CC6600\">\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"contact_record.html?id="+list[i].customId+"\" id='follow_a"+i+"' title=\"跟进记录\" style=\"color:#33cc00\">\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t<a onclick=\"isDel("+list[i].customId+");\" id='delete_a"+i+"' title=\"删除\" style=\"color:#CC0000\">\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t</td></tr>");
+                            $($tr).appendTo('#dataList').addClass("customList");
+                            if(list[i].canOperate == '0'){
+                                $("#update_a"+i).hide();
+                                $("#delete_a"+i).hide();
+                                $("#follow_a"+i).hide();
+							}else{
+                                $("#detail_a"+i).hide();
+							}
+//							已成交客户不给予删除
+                            if(list[i].customDeal == '1'){
+                                $("#delete_a"+i).hide();
+							}
+                        }
+                        $("#listInfo").text("显示 "+((data.data.page - 1 )*data.data.size + 1)+" 到 "+(((data.data.page - 1 )*data.data.size)+ list.length)+" 项，共 "+data.data.amount+" 项");
+//                        var strBuffer = [];  //缓冲字符串
+                        var str="";
+                        for(var i = 1 ; i <= parseInt(data.data.maxPage) ;i++){
+                            if( i == 1){
+//                              strBuffer.push("<span class=\"prev\" onclick='getManagerList(1 , "+likeName+")' href=\"\">&lt;&lt;</span>");
+                                str += "<li><a onclick='getGongKeList("+i+")'>&laquo;</a></li>";
+                            }
+                            if( i == parseInt(data.data.page)){
+//                              strBuffer.push("<span class=\"current\">"+i+"</span>");
+                                str += "<li class=\"active\"><a>"+i+"</a></li>";
+                            }else{
+//                              strBuffer.push("<span class=\"num\" onclick='getManagerList("+i+" , "+likeName+")' href=\"\">"+i+"</span>");
+                                str += "<li><a onclick='getGongKeList("+i+")'>"+i+"</a></li>";
+                            }
+                            if(i == parseInt(data.data.maxPage)){
+//                              strBuffer.push("<span class=\"next\" onclick='getManagerList("+data.data.maxPage+" , "+likeName+")'  href=\"\">&gt;&gt;</span>");
+                                str += "<li><a onclick='getGongKeList("+i+")'>&raquo;</a></li>";
+                            }
+                        }
+//                      str= strBuffer.join();
+//                      str.replace(/","/g,"");
+//                      console.log(str)
+                        $("#page").html(str);
+                        // var pre = parseInt(data.data.page)-1 ;
+                        // var next = parseInt(data.data.page)+1 ;
+                        // if(pre != 0){
+                        // $(".pre").html("<span><a class=\"zzd-btnpage\" title=\"\" onclick='"+(pre == 0 ? 'javascript:layer.msg("已经在第一页")':'getAllUser('+pre+',\"'+likeName+'\")')+"' href=\"javascript:void(0)\">上一页</a></span>");
+                        // }
+                        // if(data.data.page != data.data.maxPage){
+                        // $(".next").html("<span><a class=\"zzd-btnpage\" title=\"\" onclick='"+(data.data.page == data.data.maxPage ? 'javascript:layer.msg("已经在最后一页")' : 'getAllUser('+next+',\"'+likeName+'\")')+"' href=\"javascript:void(0)\">下一页</a></span>");
+                        // }
+                    }else{
+                        // layer.msg(data.message);
+                    }
+
+                },
+                fail: function (err) {
+                    // console.log(err)
+                    $("#dataList").html("暂无数据");
+                }
+            })
+        }
+        function isDel(id) {
+            swal({title:"您确定要删除这条信息吗",
+                    text:"删除后将无法恢复，请谨慎操作！",
+                    type:"warning",
+                    showCancelButton:true,
+                    confirmButtonColor:"#DD6B55",
+                    confirmButtonText:"确定",
+                    cancelButtonText:"取消",
+                    closeOnConfirm:false,
+                    closeOnCancel:false},
+                function(isConfirm){
+                    if(isConfirm){
+                        $.ajax({
+                            url:getRootPath()+"/backstage/updateCustom",
+                            data:{
+                                customId:id,
+                                customDisplay:0,
+                            },
+                            type: 'post',
+                            dataType: 'json',
+                            timeout: 1000,
+                            success: function (data) {
+                                console.log(data);
+                                if(data.code == 2000){
+                                    swal("删除成功！","您已经永久删除了这条信息。",
+                                        "success"
+                                    )
+                                    getMyList(pageP);
+                                }else{
+                                    alert(data.message);
+                                }
+
+                            },
+                            fail: function (err) {
+                                // console.log(err)
+                            }
+                        })
+
+                    }else{
+                        swal("已取消",
+                            "您取消了删除操作！","error"
+                        )
+                    }
+                }
+            )
+        };
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

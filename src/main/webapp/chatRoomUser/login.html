@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>小小的聊天室——登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Transparent Sign In Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript"> 
+//        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+//        function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <script src="static/js/common/jquery-1.9.1.min.js"></script>
+    <link rel="icon" href="static/img/chat.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/common/font-awesome.css"/> <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="static/css/login.css" type="text/css" media="all" /> <!-- Style-CSS -->
+	<style>
+		#adv{
+			background: #fff;width: 13%;position: fixed;bottom: 0px;right: 4rem;height: 25rem;box-shadow: 0 0 5rem #E8E8E8;
+		}
+		.adv_tit{
+			border-bottom: 1px #ededed solid;text-align: left;height: 3rem;
+		}
+		.adv_tit .adv_tit_txt{
+			display: inline-block;padding: .8rem;font-size: 1rem;color: #4A4A4A;width: 70%;
+		}
+		.adv_tit .adv_tit_txt img{
+			width: 1rem;height: 1rem;margin: 0px 5px;vertical-align: middle;
+		}
+		.adv_li{
+			display: inline-flex;width: 100%;border-bottom: 1px #EDEDED solid;
+		}
+		.adv_li .adv_li_head{
+			width:25%;
+		}
+		.adv_li .adv_li_head img{
+			border-radius: 20px;width: 2.5rem;height: 2.5rem;margin: .8rem;
+		}
+		.adv_li .adv_li_info{
+			width:75%;display: flex;justify-content:left;align-items:Center;
+		}
+		.adv_li .adv_li_info .adv_name{
+			color:#4A4A4A;
+		}
+		.adv_li .adv_li_info .adv_position{
+			color:#919191;font-size: .3rem;
+		}
+	</style>
+</head>
+<body class="background">
+		<div class="header-w3l">
+			<h1>小小的聊天室</h1>
+		</div>
+		<div class="main-content-agile">
+			<div class="sub-main-w3">	
+				<h2>一鼎客服入口</h2>
+				<form>
+					
+					<!--<div class="icon1">-->
+						<!--<input placeholder="用户名" id="username" type="text" value="12345678910"/>-->
+					<!--</div>-->
+					<!---->
+					<!--<div class="icon2">-->
+						<!--<input  placeholder="密码" id="password" type="password" value="123456"/>-->
+					<!--</div>-->
+					 
+						<div class="clear"></div>
+					<input type="button" value="游客进入" onclick="login()"/>
+				</form>
+			</div>
+		</div>
+		<div class="footer">
+			<p>&copy; 2018 CSCW back-end Kanarien, All Rights Reserved </p>
+		</div>
+
+
+		<div id="adv">
+			<div class="adv_tit">
+				<div class="adv_tit_txt"><img src="static/img/chat.png">在线客服</div>
+				<i class="fa fa-chevron-down" style="padding: .5rem;" id="adv_down_btn"></i>
+				<i class="fa fa-chevron-up" style="padding: .5rem;display: none;" id="adv_up_btn"></i>
+			</div>
+			<ul>
+				<li class="adv_li">
+					<div class="adv_li_head"><img src="static/img/avatar/Member001.jpg"></div>
+					<div class="adv_li_info"><span class="adv_name">客服名 <i class="adv_position">高级置业顾问</i></span></div>
+				</li>
+				<li class="adv_li">
+					<div class="adv_li_head"><img src="static/img/avatar/Member001.jpg"></div>
+					<div class="adv_li_info"><span class="adv_name">客服名 <i class="adv_position">高级置业顾问</i></span></div>
+				</li>
+				<li class="adv_li">
+					<div class="adv_li_head"><img src="static/img/avatar/Member001.jpg"></div>
+					<div class="adv_li_info"><span class="adv_name">客服名 <i class="adv_position">高级置业顾问</i></span></div>
+				</li>
+				<li class="adv_li">
+					<div class="adv_li_head"><img src="static/img/avatar/Member001.jpg"></div>
+					<div class="adv_li_info"><span class="adv_name">客服名 <i class="adv_position">高级置业顾问</i></span></div>
+				</li>
+			</ul>
+		</div>
+</body>
+<!--<script type="text/javascript" src="js/getrootpath.js"></script>-->
+<script type="text/javascript">
+//	var sourse = document.referrer;
+//	var ip = "";
+//	var province = "";
+//	var city = "";
+//	var shebei = "";
+//	var xitong = "";
+//    //获取城市ajax
+//    $.ajax({
+//        url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',
+//        type: 'POST',
+//        dataType: 'jsonp',
+//        success:function(data) {
+//            console.log(JSON.stringify(data.content.address_detail.province + "," + data.content.address_detail.city));
+////            $('#city').html(JSON.stringify(data.content.address_detail.province + "," + data.content.address_detail.city))
+//			province = data.content.address_detail.province;
+//			city = data.content.address_detail.city
+//        }
+//    });
+//    $.getScript('http://pv.sohu.com/cityjson?ie=utf-8',function(){
+//        console.log(returnCitySN)
+//		ip = returnCitySN.cip;
+////        $(".country").html(remote_ip_info.country);
+////        $(".province").html(remote_ip_info.province);
+////        $(".city").html(remote_ip_info.city);
+////        $(".isp").html(remote_ip_info.isp);
+//    });
+//	console.log(navigator)
+//	if(navigator.platform.indexOf("Win32") >  -1){
+//        shebei = "电脑";
+//        xitong ="Window系统"
+//	}else if(navigator.platform.indexOf("Linuxi586") > -1 ){
+//        shebei = "手机";
+//        xitong ="Android系统"
+//    }else if(navigator.platform.indexOf("MacPPC") > -1){
+//        shebei = "电脑";
+//        xitong ="MAC"
+//    }else if(navigator.platform.indexOf("IOS") > -1){
+//        shebei = "手机";
+//        xitong ="IOS系统"
+//    }
+//    //    http://ip.taobao.com/service/getIpInfo.php?ip=118.120.123.123
+//
+//    function login() {
+//    console.log("ip",ip)
+//    console.log("province",province)
+//    console.log("city",city)
+//        console.log("shebei",shebei)
+//        console.log("xitong",xitong)
+//
+//        $.ajax({
+//			type : 'POST',
+//            url : '/chatUser/insertVisitor',
+//            dataType: 'json',
+//            data : {
+//                visitorIp: ip,
+//                visitorProvince:province,
+//                visitorCity:city,
+//                visitorPlat:shebei,
+//                visitorSystem:xitong,
+//            },
+//            async : false,
+//            success: function(data) {
+//                console.log(data)
+//                if (data.code == 2000) {
+//                    window.location.href="chatroom.html";
+//                } else {
+//                    alert(data.message);
+//                }
+//            }
+//			});
+//        }
+$("i#adv_down_btn").click(function(){
+    $("#adv").animate({
+        'bottom': '-22rem'
+    }, 500);
+    $(this).hide();
+    $("i#adv_up_btn").show();
+});
+$("i#adv_up_btn").click(function(){
+    $("#adv").animate({
+        'bottom': '0%'
+    }, 500);
+    $(this).hide();
+    $("i#adv_down_btn").show();
+});
+</script>
+</html>

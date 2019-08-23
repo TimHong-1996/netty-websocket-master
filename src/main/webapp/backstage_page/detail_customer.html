@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - Bootstrap Table</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        
+        <!-- Panel Other -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>客户详情</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    
+
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+								<div class="btn-group hidden-xs pull-right" id="exampleTableEventsToolbar" role="group">
+									<!--<button type="button" class="btn btn-outline btn-default" title="修改" data-toggle="modal" data-target="#myModal3" style="color:#CC6600" id="cj_btn">-->
+										<!--<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>-->
+										<!--成交用户-->
+									<!--</button>-->
+									<!--<a type="button" class="btn btn-outline btn-default" id="gj_btn">-->
+										<!--<i style="color:#33cc00" class="glyphicon glyphicon-list-alt" aria-hidden="true" style="color:blue"></i>-->
+										<!--跟进记录-->
+									<!--</a>-->
+									<!--<button type="button" class="btn btn-outline btn-default">
+										<i  style="color:#CC6600" class="glyphicon glyphicon-user" aria-hidden="true" style="color:blue"></i>
+										联系人
+									</button>
+
+									<button type="button" class="btn btn-outline btn-default">
+										<i style="color:#ff3300" class="glyphicon glyphicon-time" aria-hidden="true" style="color:blue"></i>
+										历史订单
+									</button>-->
+									<button type="button" class="btn btn-outline btn-default">
+										<i class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:blue"></i>
+										返回
+									</button>
+								</div>
+                                <form id="updateform">
+								<table class="table table-bordered">
+						<tr>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">客户编号</span>
+							</th>
+							<td width="35%">
+								<input type="text" id="customId" name="customId" class="form-control input-sm" disabled >
+							</td>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">客户名称</span>
+							</th>
+							<td width="35%">
+								<input type="text" id="customName" name="customName" class="form-control input-sm" disabled>
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">省</span>
+							</th>
+							<td>
+								<input type="text" id="customProvince" name="customProvince" class="form-control input-sm" disabled>
+							</td>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">市</span>
+							</th>
+							<td>
+								<input type="text" id="customCity" name="customCity" class="form-control input-sm" disabled>
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">性别</span>
+							</th>
+							<td>
+								<select id="customSex" name="customSex" class="form-control input-sm" disabled>
+								  <option value="1">男</option>
+								  <option value="0">女</option>
+								</select>
+							</td>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">联系方式</span>
+							</th>
+							<td>
+								<input type="text" id="customPhone" name="customPhone" maxlength="11" class="form-control input-sm" disabled>
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">来源</span>
+							</th>
+							<td>
+								<input type="text" id="customSource" name="customSource" class="form-control input-sm" disabled>
+							</td>
+							<th  style="background-color:#F5F5F6">
+								<span style="color:#000">需求</span>
+							</th>
+							<td>
+								<input type="text" id="customNeed" name="customNeed" class="form-control input-sm" disabled>
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">备注</span>
+							</th>
+							<td>
+								<input type="text" id="customRemarke" name="customRemarke" class="form-control input-sm" disabled>
+							</td>
+							<th  style="background-color:#F5F5F6">
+								<span style="color:#000">创建人</span>
+							</th>
+							<td>
+								<input type="text" id="managerName" class="form-control input-sm" disabled >
+							</td>
+						</tr>
+
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">创建时间</span>
+							</th>
+							<td>
+								<input type="text" id="customCreatetime" class="form-control input-sm" disabled >
+							</td>
+							<th  style="background-color:#F5F5F6">
+								<span style="color:#000">最近一次跟进时间</span>
+							</th>
+							<td>
+								<input type="text" id="customUpdatetime" class="form-control input-sm" disabled >
+							</td>
+						</tr>
+					</table>
+								</form>
+					<!--<table class="table table-bordered">-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">地址</span>-->
+							<!--</th>-->
+							<!--<td width="35%">-->
+								<!--<input type="email" class="form-control input-sm" value="北京市海淀区成府路702号">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">邮政编码</span>-->
+							<!--</th>-->
+							<!--<td width="35%">-->
+								<!--<input type="email" class="form-control input-sm" value="100027">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">电话</span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!--<input type="text" class="form-control input-sm" value="010-62283393">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">传真</span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!--<input type="text" class="form-control input-sm" value="010-62283396">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">网址</span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!--<input type="text" class="form-control input-sm" value="www.conghai.com">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000"></span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!---->
+							<!--</td>-->
+						<!--</tr>-->
+					<!--</table>-->
+					
+					<!--<table class="table table-bordered">-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">营业执照注册号</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">法人</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="聪颖">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">注册资金（万元）</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">年营业额</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">开户银行</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="北京银行 中关村支行">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">银行帐号</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">地税登记号</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6" width="15%">-->
+								<!--<span style="color:#000">国税登记号</span>-->
+							<!--</th>-->
+							<!--<td  width="35%">-->
+								<!--<input type="text" class="form-control input-sm" value="">-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td colspan="4">-->
+								<!--<div class="pull-right">-->
+									<!--<input type="button"  class="btn btn-info" value="保存"/>-->
+								<!--</div>-->
+							<!--</td>-->
+						<!--</tr>-->
+					<!--</table>-->
+								
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+	<div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" style="width:400px;margin-top:85px;">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header" style="height:50px;padding-top:15px;">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+					<div class="pull-left"><h4>填写成交记录</h4></div>
+				</div>
+				<div class="modal-body" style="background-color:#fff;padding-bottom:0px;padding-top:10px;">
+					<form id="dealForm">
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >客户编号</span>
+                                    <input type="text" class="form-control" name="customId" readonly value="1"/>
+                                </div>
+                            </div>
+							
+							<div class="form-group" style="width:150px">
+                                <div class="input-group input-group-sm">
+                                   
+                                </div>
+                            </div>
+							
+							<div class="form-group" style="width:150px">
+                                
+                            </div>
+							<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >楼盘</span>
+                                    <input type="text" class="form-control" name="dealBuild" placeholder="楼盘名"/>
+                                </div>
+                            </div>
+						<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >成交日期</span>
+                                    <input type="date" class="form-control" name="dealDate" />
+                                </div>
+                            </div>
+						<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >佣金</span>
+                                    <input type="text" class="form-control" name="dealCommission" placeholder="佣金"/>
+                                </div>
+                            </div>
+						<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >面积</span>
+                                    <input type="text" class="form-control" name="dealArea" placeholder="面积"/>
+                                </div>
+                            </div>
+						<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >房号</span>
+                                    <input type="text" class="form-control" name="dealNum" placeholder="房号"/>
+                                </div>
+                            </div>
+						<!--<div class="form-group">-->
+                                <!--<div class="input-group input-group-sm">-->
+                                    <!--<span class="input-group-addon" >业务评价</span>-->
+                                    <!--<input type="text" class="form-control" placeholder="业务评价"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" style="width:150px">-->
+                                <!--<div class="input-group input-group-sm">-->
+                                    <!--<span class="input-group-addon" >是否可编辑</span>-->
+                                    <!--<select class="form-control">-->
+                                    	<!--<option>是</option>-->
+                                        <!--<option>否</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            
+                            <div class="form-group form-group-sm">
+                                <input type="button" class="btn btn-warning" id="deal-insert-btn" value="确认">
+                            </div>
+                            
+                        </form> 
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!--<script src="js/content.min.js?v=1.0.0"></script>-->
+	<script type="text/javascript" src="js/getrootpath.js"></script>
+	<script src="js/jquery.params.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/demo/bootstrap-table-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	<script>
+        var id = $.query.get("id");
+		getCustomInfo(id)
+		function getCustomInfo(id) {
+            $.ajax({
+                url:getRootPath()+"/backstage/selectCustomById",
+                data:{
+                    customId:id,
+                },
+                type: 'post',
+                dataType: 'json',
+                timeout: 1000,
+//                beforeSend:function(){
+//                    var index = layer.load(1, {
+//                        shade: [0.35,'#052963'], //0.1透明度的白色背景
+//                        time:1000
+//                    });
+//                },
+                success: function (data) {
+                    console.log(data);
+                    if(data.code == 2000){
+                        console.log(data.message);
+                        $("#customId").val(data.data.customId);
+                        $("#customName").val(data.data.customName);
+                        $("#customCity").val(data.data.customCity);
+                        $("#customProvince").val(data.data.customProvince);
+                        $("#customCreatetime").val(data.data.customCreatTime);
+                        $("#customNeed").val(data.data.customNeed);
+                        $("#customPhone").val(data.data.customPhone);
+                        $("#customRemarke").val(data.data.customRemarke);
+                        $("#customSex").val(data.data.customSex);
+                        $("#customSource").val(data.data.customSource);
+                        $("#customUpdatetime").val(data.data.customUpdateTime);
+
+                        $("#managerName").val(data.data.managerDto.managerName);
+//                        可否成交多套 ？
+//						if(data.data.canOperate == '0')
+//                            $("#cj_btn").hide();
+
+                    }else{
+                        console.log(data.message);
+                    }
+
+                },
+                fail: function (err) {
+                    // console.log(err)
+                }
+            })
+        }
+
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

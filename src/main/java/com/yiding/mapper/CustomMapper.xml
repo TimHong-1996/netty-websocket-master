@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiding.dao.CustomMapper" >
+  <resultMap id="BaseResultMap" type="com.yiding.pojo.Custom" >
+    <id column="custom_id" property="customId" jdbcType="BIGINT" />
+    <result column="custom_name" property="customName" jdbcType="VARCHAR" />
+    <result column="custom_sex" property="customSex" jdbcType="TINYINT" />
+    <result column="custom_province" property="customProvince" jdbcType="VARCHAR" />
+    <result column="custom_city" property="customCity" jdbcType="VARCHAR" />
+    <result column="custom_phone" property="customPhone" jdbcType="VARCHAR" />
+    <result column="custom_source" property="customSource" jdbcType="VARCHAR" />
+    <result column="custom_need" property="customNeed" jdbcType="VARCHAR" />
+    <result column="custom_creat_time" property="customCreatTime" jdbcType="TIMESTAMP" />
+    <result column="custom_remark" property="customRemark" jdbcType="VARCHAR" />
+    <result column="custom_update_time" property="customUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="custom_deal" property="customDeal" jdbcType="TINYINT" />
+    <result column="custom_state" property="customState" jdbcType="TINYINT" />
+    <result column="custom_display" property="customDisplay" jdbcType="TINYINT" />
+    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="unname1" property="unname1" jdbcType="VARCHAR" />
+    <result column="unname2" property="unname2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    custom_id, custom_name, custom_sex, custom_province, custom_city, custom_phone, custom_source, 
+    custom_need, custom_creat_time, custom_remark, custom_update_time, custom_deal, custom_state, 
+    custom_display, manager_id, unname1, unname2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from custom
+    where custom_id = #{customId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAllUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from custom
+    where custom_display = 1 AND custom_deal = 0 AND custom_state != 2
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from custom
+    where custom_display = 1
+    <if test="xingming!=null">
+      AND custom_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="sex!=null">
+      AND custom_sex = #{sex ,jdbcType=TINYINT}
+    </if>
+    <if test="laiyuan!=null">
+      AND custom_source = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng!=null">
+      AND custom_province = #{sheng,jdbcType=VARCHAR}
+    </if>
+    <if test="shi!=null">
+      AND custom_city = #{shi,jdbcType=VARCHAR}
+    </if>
+    <if test="chengjiao!=null">
+      AND custom_deal = #{chengjiao,jdbcType=TINYINT}
+    </if>
+    <if test="managerId!=null">
+      AND manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+    <choose>
+      <when test="open==1">
+        AND custom_state &lt;= 1
+      </when>
+      <when test="open==2">
+        AND custom_state = 2
+      </when>
+      <otherwise>
+        AND custom_state &lt;= 2
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="sort==1">
+        ORDER BY custom_creat_time
+      </when>
+      <when test="sort==2">
+        ORDER BY custom_creat_time DESC
+      </when>
+      <when test="sort==3">
+        ORDER BY custom_update_time
+      </when>
+      <when test="sort==4">
+        ORDER BY custom_update_time DESC
+      </when>
+      <when test="sort==5">
+        ORDER BY custom_state
+      </when>
+      <when test="sort==6">
+        ORDER BY custom_state DESC
+      </when>
+      <otherwise>
+        ORDER BY custom_update_time DESC ,custom_creat_time DESC ,custom_state DESC
+      </otherwise>
+    </choose>
+    limit #{start} , #{size}
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer" >
+    select
+    COUNT(1)
+    from custom
+    where custom_display = 1
+    <if test="xingming!=null">
+      AND custom_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="sex!=null">
+      AND custom_sex = #{sex ,jdbcType=TINYINT}
+    </if>
+    <if test="laiyuan!=null">
+      AND custom_source = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng!=null">
+      AND custom_province = #{sheng,jdbcType=VARCHAR}
+    </if>
+    <if test="shi!=null">
+      AND custom_city = #{shi,jdbcType=VARCHAR}
+    </if>
+    <if test="chengjiao!=null">
+      AND custom_deal = #{chengjiao,jdbcType=TINYINT}
+    </if>
+    <if test="gongsi!=null">
+      AND custom_state = #{gongsi,jdbcType=TINYINT}
+    </if>
+    <if test="managerId!=null">
+      AND manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+    <choose>
+      <when test="open==1">
+        AND custom_state &lt;= 1
+      </when>
+      <when test="open==2">
+        AND custom_state = 2
+      </when>
+      <otherwise>
+        AND custom_state &lt;= 2
+      </otherwise>
+    </choose>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from custom
+    where custom_id = #{customId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yiding.pojo.Custom" >
+    insert into custom (custom_id, custom_name, custom_sex, 
+      custom_province, custom_city, custom_phone, 
+      custom_source, custom_need, custom_creat_time, 
+      custom_remark, custom_update_time, custom_deal, 
+      custom_state, custom_display, manager_id, 
+      unname1, unname2)
+    values (#{customId,jdbcType=BIGINT}, #{customName,jdbcType=VARCHAR}, #{customSex,jdbcType=TINYINT}, 
+      #{customProvince,jdbcType=VARCHAR}, #{customCity,jdbcType=VARCHAR}, #{customPhone,jdbcType=VARCHAR}, 
+      #{customSource,jdbcType=VARCHAR}, #{customNeed,jdbcType=VARCHAR}, #{customCreatTime,jdbcType=TIMESTAMP}, 
+      #{customRemark,jdbcType=VARCHAR}, #{customUpdateTime,jdbcType=TIMESTAMP}, #{customDeal,jdbcType=TINYINT}, 
+      #{customState,jdbcType=TINYINT}, #{customDisplay,jdbcType=TINYINT}, #{managerId,jdbcType=BIGINT}, 
+      #{unname1,jdbcType=VARCHAR}, #{unname2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="customId" parameterType="com.yiding.pojo.Custom" >
+    insert into custom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customId != null" >
+        custom_id,
+      </if>
+      <if test="customName != null" >
+        custom_name,
+      </if>
+      <if test="customSex != null" >
+        custom_sex,
+      </if>
+      <if test="customProvince != null" >
+        custom_province,
+      </if>
+      <if test="customCity != null" >
+        custom_city,
+      </if>
+      <if test="customPhone != null" >
+        custom_phone,
+      </if>
+      <if test="customSource != null" >
+        custom_source,
+      </if>
+      <if test="customNeed != null" >
+        custom_need,
+      </if>
+      <if test="customCreatTime != null" >
+        custom_creat_time,
+      </if>
+      <if test="customRemark != null" >
+        custom_remark,
+      </if>
+      <if test="customUpdateTime != null" >
+        custom_update_time,
+      </if>
+      <if test="customDeal != null" >
+        custom_deal,
+      </if>
+      <if test="customState != null" >
+        custom_state,
+      </if>
+      <if test="customDisplay != null" >
+        custom_display,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="unname1 != null" >
+        unname1,
+      </if>
+      <if test="unname2 != null" >
+        unname2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customId != null" >
+        #{customId,jdbcType=BIGINT},
+      </if>
+      <if test="customName != null" >
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="customSex != null" >
+        #{customSex,jdbcType=TINYINT},
+      </if>
+      <if test="customProvince != null" >
+        #{customProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="customCity != null" >
+        #{customCity,jdbcType=VARCHAR},
+      </if>
+      <if test="customPhone != null" >
+        #{customPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customSource != null" >
+        #{customSource,jdbcType=VARCHAR},
+      </if>
+      <if test="customNeed != null" >
+        #{customNeed,jdbcType=VARCHAR},
+      </if>
+      <if test="customCreatTime != null" >
+        #{customCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customRemark != null" >
+        #{customRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="customUpdateTime != null" >
+        #{customUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customDeal != null" >
+        #{customDeal,jdbcType=TINYINT},
+      </if>
+      <if test="customState != null" >
+        #{customState,jdbcType=TINYINT},
+      </if>
+      <if test="customDisplay != null" >
+        #{customDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="unname1 != null" >
+        #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        #{unname2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiding.pojo.Custom" >
+    update custom
+    <set >
+      <if test="customName != null" >
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="customSex != null" >
+        custom_sex = #{customSex,jdbcType=TINYINT},
+      </if>
+      <if test="customProvince != null" >
+        custom_province = #{customProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="customCity != null" >
+        custom_city = #{customCity,jdbcType=VARCHAR},
+      </if>
+      <if test="customPhone != null" >
+        custom_phone = #{customPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customSource != null" >
+        custom_source = #{customSource,jdbcType=VARCHAR},
+      </if>
+      <if test="customNeed != null" >
+        custom_need = #{customNeed,jdbcType=VARCHAR},
+      </if>
+      <if test="customCreatTime != null" >
+        custom_creat_time = #{customCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customRemark != null" >
+        custom_remark = #{customRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="customUpdateTime != null" >
+        custom_update_time = #{customUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customDeal != null" >
+        custom_deal = #{customDeal,jdbcType=TINYINT},
+      </if>
+      <if test="customState != null" >
+        custom_state = #{customState,jdbcType=TINYINT},
+      </if>
+      <if test="customDisplay != null" >
+        custom_display = #{customDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="unname1 != null" >
+        unname1 = #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        unname2 = #{unname2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where custom_id = #{customId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiding.pojo.Custom" >
+    update custom
+    set custom_name = #{customName,jdbcType=VARCHAR},
+      custom_sex = #{customSex,jdbcType=TINYINT},
+      custom_province = #{customProvince,jdbcType=VARCHAR},
+      custom_city = #{customCity,jdbcType=VARCHAR},
+      custom_phone = #{customPhone,jdbcType=VARCHAR},
+      custom_source = #{customSource,jdbcType=VARCHAR},
+      custom_need = #{customNeed,jdbcType=VARCHAR},
+      custom_creat_time = #{customCreatTime,jdbcType=TIMESTAMP},
+      custom_remark = #{customRemark,jdbcType=VARCHAR},
+      custom_update_time = #{customUpdateTime,jdbcType=TIMESTAMP},
+      custom_deal = #{customDeal,jdbcType=TINYINT},
+      custom_state = #{customState,jdbcType=TINYINT},
+      custom_display = #{customDisplay,jdbcType=TINYINT},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      unname1 = #{unname1,jdbcType=VARCHAR},
+      unname2 = #{unname2,jdbcType=VARCHAR}
+    where custom_id = #{customId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,3 @@
+$(function(){
+    // getManagerList(1,"");
+})

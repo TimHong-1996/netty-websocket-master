@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>客户管理系统</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script src="js/getrootpath.js"></script>
+ <script type="text/javascript">
+        function insert() {
+            $.ajax({
+                type: "POST",//方法
+                url: getRootPath() + "/backstage/insertCustom" ,//表单接收url
+                data: $('#form1').serialize(),
+                		dataType: 'json',
+                success: function (res) {
+    						console.log(res)
+					    if(res.code == 2000){
+							alert(res.message)
+                            window.location.href='customer_infc.html';
+						  }else{
+							alert(res.message)
+						  }						    						                              
+//提交成功的提示词或者其他反馈代码
+//                    var result=document.getElementById("success");
+//                    result.innerHTML="成功!";
+                },
+                error : function(res) {
+                    		console.log(res)
+                  //提交失败的提示词或者其他反馈代码
+//                    var result=document.getElementById("success");
+//                    result.innerHTML="失败!";
+                }
+            });
+        }
+    </script>
+
+
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        
+        <!-- Panel Other -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加客户</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    
+
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <form id="form1">
+                                
+								<table class="table table-bordered">
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">姓名</span>
+							</th>
+							<td>
+								<input name="customName" class="form-control input-sm" placeholder="客户姓名">
+							</td>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">性别</span>
+							</th>
+							<td width="35%">
+								<select class="form-control input-sm" name="customSex">
+									<option value="1">男</option>
+									<option value="0">女</option>
+								</select>
+							</td>
+
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">客户来源</span>
+							</th>
+							<td>
+								<input name="customSource" class="form-control input-sm" placeholder="客户来源">
+								<!--<select id="customSource" name="customSource" class="form-control input-sm">-->
+								<!--<option >百度</option>-->
+								<!--<option >搜狐</option>-->
+								<!--<option >其他</option>-->
+								<!--</select>-->
+							</td>
+								<th style="background-color:#F5F5F6">
+								<span style="color:#000">客户电话</span>
+							</th>
+							
+							<td>
+								<input name="customPhone" class="form-control input-sm" maxlength="11" placeholder="客户电话">
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">省</span>
+							</th>
+							<td>
+								<input name="customProvince" type="text" class="form-control input-sm" placeholder="客户来自的省份">
+							</td>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">市</span>
+							</th>
+							<td>
+								<input name="customCity" type="text" class="form-control input-sm"  placeholder="客户来自的城市" />
+							</td>
+						</tr>
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">客户需求</span>-->
+							<!--</th>-->
+							<!--<td colspan="3">-->
+								<!--<textarea class="form-control"  type="customNeed" rows="3"></textarea>-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">客户跟进</span>-->
+							<!--</th>-->
+							<!--<td colspan="3">-->
+								<!--<textarea class="form-control" rows="3"></textarea>-->
+							<!--</td>-->
+						<!--</tr>			-->
+						<!--<tr>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">创建人</span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!--<input type="email" class="form-control input-sm" placeholder="创建人">-->
+							<!--</td>-->
+							<!--<th style="background-color:#F5F5F6">-->
+								<!--<span style="color:#000">创建时间</span>-->
+							<!--</th>-->
+							<!--<td>-->
+								<!--<input type="text" class="form-control input-sm" value="创建时间" />-->
+							<!--</td>-->
+						<!--</tr>-->
+					<tr>
+
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">需求</span>
+							</th>
+							<td width="35%">
+								<input type="text" class="form-control input-sm" name="customNeed" placeholder="需求">
+
+							</td>
+							<th style="background-color:#F5F5F6">
+								<span style="color:#000">备注</span>
+							</th>
+							<td>
+								<input type="text" class="form-control input-sm" name="customRemark" placeholder="备注">
+							</td>
+						</tr>				
+					</table>
+					
+					
+					
+					<!--<table class="table table-bordered">
+						<tr>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">服务处理</span>
+							</th>
+							<td colspan="3" width="35%">
+								<textarea class="form-control" rows="3" disabled ></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">处理人</span>
+							</th>
+							<td  width="35%">
+								<input type="text" class="form-control input-sm" disabled />
+							</td>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">处理时间</span>
+							</th>
+							<td  width="35%">
+								<input type="text" class="form-control input-sm" disabled />
+							</td>
+						</tr>
+					</table>
+					
+					<table class="table table-bordered">
+						<tr>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">处理结果</span>
+							</th>
+							<td  width="35%">
+								<input type="text" class="form-control input-sm" disabled />
+							</td>
+							<th style="background-color:#F5F5F6" width="15%">
+								<span style="color:#000">满意度</span>
+							</th>
+							<td  width="35%">
+								<select class="form-control input-sm" disabled >
+								  <option>☆☆☆☆☆</option>
+								  <option>☆☆☆☆</option>
+								</select>
+							</td>
+						</tr>-->
+						<tr>
+							<td colspan="4">
+								<div class="pull-right">
+									<input type="button"  class="btn btn-info" value="保存" onclick="insert()"/>
+								</div>
+							</td>
+						</tr>
+					</table>
+							</form>
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+	<!--<script src="js/1.js"></script>-->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/demo/bootstrap-table-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

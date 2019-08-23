@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiding.dao.LogMapper">
+  <resultMap id="BaseResultMap" type="com.yiding.pojo.Log">
+    <id column="log_id" jdbcType="BIGINT" property="logId" />
+    <result column="visitor_id" jdbcType="BIGINT" property="visitorId" />
+    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
+    <result column="log_type" jdbcType="TINYINT" property="logType" />
+    <result column="log_content" jdbcType="VARCHAR" property="logContent" />
+    <result column="log_date" jdbcType="TIMESTAMP" property="logDate" />
+    <result column="log_success" jdbcType="TINYINT" property="logSuccess" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, visitor_id, manager_id, log_type, log_content, log_date, log_success
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </select>
+  <select id="selectLogByIdAndPage" parameterType="java.util.Map" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from log
+    where manager_id = #{managerId,jdbcType=BIGINT} AND visitor_id = #{visitorId,jdbcType=BIGINT}
+    ORDER BY log_date DESC
+    limit #{start} ,#{size}
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yiding.pojo.Log">
+    insert into log (log_id, visitor_id, manager_id, 
+      log_type, log_content, log_date, 
+      log_success)
+    values (#{logId,jdbcType=BIGINT}, #{visitorId,jdbcType=BIGINT}, #{managerId,jdbcType=BIGINT}, 
+      #{logType,jdbcType=TINYINT}, #{logContent,jdbcType=VARCHAR}, #{logDate,jdbcType=TIMESTAMP}, 
+      #{logSuccess,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiding.pojo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="visitorId != null">
+        visitor_id,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="logContent != null">
+        log_content,
+      </if>
+      <if test="logDate != null">
+        log_date,
+      </if>
+      <if test="logSuccess != null">
+        log_success,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorId != null">
+        #{visitorId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="logContent != null">
+        #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null">
+        #{logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSuccess != null">
+        #{logSuccess,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiding.pojo.Log">
+    update log
+    <set>
+      <if test="visitorId != null">
+        visitor_id = #{visitorId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=TINYINT},
+      </if>
+      <if test="logContent != null">
+        log_content = #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null">
+        log_date = #{logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSuccess != null">
+        log_success = #{logSuccess,jdbcType=TINYINT},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiding.pojo.Log">
+    update log
+    set visitor_id = #{visitorId,jdbcType=BIGINT},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      log_type = #{logType,jdbcType=TINYINT},
+      log_content = #{logContent,jdbcType=VARCHAR},
+      log_date = #{logDate,jdbcType=TIMESTAMP},
+      log_success = #{logSuccess,jdbcType=TINYINT}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+</mapper>

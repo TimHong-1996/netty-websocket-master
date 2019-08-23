@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>小小的聊天室</title>
+<link rel="icon" href="static/img/chat.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="static/css/chatroom.css">
+<link rel="stylesheet" type="text/css" href="static/css/common/layui.css">
+<link rel="stylesheet" type="text/css" href="static/css/common/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/common/fileinput.min.css">
+</head>
+<body>
+<div class="qqBox">
+    <div class="BoxHead" style="position: relative;    border-top-right-radius: 10px;border-top-left-radius: 10px;    cursor: move;">
+        <div style="background: black;width: 200px;    border-top-left-radius: 10px;"></div>
+        <div class="headImg" style="display: none;">
+            <img id="avatarUrl" src=""/>
+        </div>
+        <div id="username" class="internetName" style="margin-left: 10px;"></div>
+        <button class="close logout" style="position:absolute;right:15px;top:15px;float: none;margin-left: 0px;" onclick="logout()">&times;</button>
+    </div>
+    <div class="context" style="position: relative;">
+        <div class="conLeft">
+            <ul>
+                
+            </ul>
+        </div>
+        <div class="conRight" >
+            <!--<div class="Righthead">-->
+                <!--<div class="headName"></div>-->
+            <!--</div>-->
+            <div class="RightCont">
+                <ul class="newsList-temp"></ul>
+                <ul class="newsList">
+                
+                </ul>
+            </div>
+            <div class="RightFoot">
+                <div class="emjon">
+                    <ul>
+                        <li><img src="static/img/emoji/emoji_01.png"></li>
+                        <li><img src="static/img/emoji/emoji_02.png"></li>
+                        <li><img src="static/img/emoji/emoji_03.png"></li>
+                        <li><img src="static/img/emoji/emoji_04.png"></li>
+                        <li><img src="static/img/emoji/emoji_05.png"></li>
+                        <li><img src="static/img/emoji/emoji_06.png"></li>
+                        <li><img src="static/img/emoji/emoji_07.png"></li>
+                        <li><img src="static/img/emoji/emoji_08.png"></li>
+                        <li><img src="static/img/emoji/emoji_09.png"></li>
+                        <li><img src="static/img/emoji/emoji_10.png"></li>
+                        <li><img src="static/img/emoji/emoji_11.png"></li>
+                        <li><img src="static/img/emoji/emoji_12.png"></li>
+                        <li><img src="static/img/emoji/emoji_13.png"></li>
+                        <li><img src="static/img/emoji/emoji_14.png"></li>
+                        <li><img src="static/img/emoji/emoji_15.png"></li>
+                        <li><img src="static/img/emoji/emoji_16.png"></li>
+                        <li><img src="static/img/emoji/emoji_17.png"></li>
+                        <li><img src="static/img/emoji/emoji_18.png"></li>
+                        <li><img src="static/img/emoji/emoji_19.png"></li>
+                        <li><img src="static/img/emoji/emoji_20.png"></li>
+                        <li><img src="static/img/emoji/emoji_21.png"></li>
+                        <li><img src="static/img/emoji/emoji_22.png"></li>
+                        <li><img src="static/img/emoji/emoji_23.png"></li>
+                        <li><img src="static/img/emoji/emoji_24.png"></li>
+                    </ul>
+                </div>
+                <div class="footTop">
+                    <ul>
+                        <li class="ExP">
+                            <img src="static/img/emoji.jpg">
+                        </li>
+                        <li class="file-upload">
+                            <a data-toggle="modal" data-target="#upload-modal" data-backdrop="static">
+                                <img  src="static/img/upload.jpg">
+                            </a>
+                        </li>
+                        <li>
+                            <select id="fastReply">
+                                <option>客服测试1</option>
+                                <option>客服测试2</option>
+                                <option>客服测试3</option>
+                            </select>
+                        </li>
+                        <li>
+                            <button onclick="getLogList(1);">聊天记录</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="inputBox">
+                <div class="inputBox">
+                    <input id="toUserId" type="hidden">
+                    <!--<input id="toGroupId" type="hidden">-->
+                    <textarea id="dope" style="resize:none;width: 99%;height: 75px; border: none;outline: none;" name="" rows="" cols=""></textarea>
+                    <button title="按下回车可发送" class="sendBtn">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="upload-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title text-primary">文件上传</h3>
+                </div>
+                <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">选择文件</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="file"
+                                class="col-sm-9 myfile" />
+                            <p class="help-block">注意：文件大小不超过30M，有效期为7天</p>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                        <button id="upload-cancel" class="btn btn-sm btn-muted" data-dismiss="modal">
+                        <i class="glyphicon glyphicon-remove"></i> 取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="historyList" style="position: absolute;top: 0px;right: -40rem;width: 40rem;    border: 1px #dbdbdb solid;padding: 2rem;height: 600px;display: none;overflow-y: scroll;overflow-x: hidden;">
+        <h4 style="text-align: center;">聊天记录 <a onclick="closeHistory()">关闭</a></h4>
+        <ul id="historyBox">
+            <li style="text-align: right;">
+                <div style="display: inline-block;"><div style="margin-left: 10px;font-size: 12px;color: #AAA;">2019-01-01</div>
+                    <div class="news" style="display: inline-block;width: auto;float:none;">123</div></div >
+                <div class="nesHead" style="display: inline-block;float:none;vertical-align: text-bottom;"><img src="./static/img/avatar/Member001.jpg"/></div>
+            </li>
+            <li style="text-align: left;">
+                <div class="answerHead"  style="display: inline-block;float:none;vertical-align: text-bottom;margin-left:0px;"><img src="./static/img/avatar/Member002.jpg"/></div>
+                <div style="display: inline-block;"><div style="margin-left: 10px;font-size: 12px;color: #AAA;">2019-01-01</div>
+                    <div class="answers" style="display: inline-block;width: auto;float:none;">123</div></div >
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="toastList">
+    <!--<div class="tip-toast" >-->
+        <!--<div style="display: inline-block;">-->
+            <!--<img style="border-radius: 2rem;" src="static/img/avatar/Member001.jpg">-->
+        <!--</div>-->
+        <!--<div style="display: inline-block;vertical-align: middle;color: #fff;">-->
+            <!--<div>Name <span>Time</span><span style=""><img style="width: 2rem;height: 2rem;" src="static/img/emoji.jpg"></span></div>-->
+            <!--<div>正在向您咨询，请尽快回复</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+
+<script type="text/javascript" src="static/js/common/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="static/js/common/jquery.actual.min.js"></script>
+<script type="text/javascript" src="static/js/common/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/common/fileinput.min.js"></script>
+<script type="text/javascript" src="static/js/common/zh.js"></script>
+<script type="text/javascript" src="static/js/getrootpath.js"></script>
+<script type="text/javascript" src="static/js/chatroom.js"></script>
+<script type="text/javascript">
+    var userId;
+    var socket;   
+//    var sentMessageMap;
+    
+    setUserInfo();
+//    setSentMessageMap();
+
+    if(!window.WebSocket){  
+        window.WebSocket = window.MozWebSocket;  
+    }  
+    if(window.WebSocket){  
+        socket = new WebSocket("ws://localhost:3333");  
+        socket.onmessage = function(event){
+            console.log(event.data)
+            var json = JSON.parse(event.data);
+            console.log(json)
+            if (json.code == 2000) {
+                var type = json.type;
+                console.log("收到一条新信息，类型为：" + type);
+                switch(type) {
+                    case "REGISTER":
+                        ws.registerReceive(json);
+                        break;
+                    case "OFFLINE":
+                        ws.offlineReceive(json);
+                        break;
+                    case "GET_HISTORY":
+                        ws.showHistory(json.data,json.historyMap,json.visitorDto);
+                        break;
+                    case "SINGLE_SENDING_FIRST":
+                        ws.singleFirstReceive(json.data);
+                        break;
+                    case "SINGLE_SENDING":
+                        ws.singleReceive(json.data,json.visitorDto);
+                        break;
+                    case "SINGLE_PRODUCT":
+                        ws.singleReceiveProduct(json.data);
+                        break;
+                    case "GROUP_SENDING":   
+                        ws.groupReceive(json.data);
+                        break;
+                    case "FILE_MSG_SINGLE_SENDING":
+                        ws.fileMsgSingleRecieve(json.data);
+                        break;
+                    case "FILE_MSG_GROUP_SENDING":
+                        ws.fileMsgGroupRecieve(json.data);
+                        break;
+                    default:
+                        console.log("不正确的类型！");
+                }
+            } else {
+                alert(json.message);
+                console.log(json.message);
+            }
+        };  
+     
+        // 连接成功1秒后，将用户信息注册到服务器在线用户表
+        socket.onopen = setTimeout(function(event){ 
+              console.log("WebSocket已成功连接！");  
+              ws.register();
+        }, 1000)  
+     
+        socket.onclose = function(event){  
+              console.log("WebSocket已关闭...");  
+        };  
+    } else {  
+          alert("您的浏览器不支持WebSocket！");  
+    }
+
+    dragPanelMove(".BoxHead",".qqBox");
+    function dragPanelMove(downDiv,moveDiv){
+        $(downDiv).mousedown(function (e) {
+
+            var isMove = true;
+            var div_x = e.pageX - $(moveDiv).offset().left;
+            var div_y = e.pageY - $(moveDiv).offset().top;
+            console.log($(moveDiv).offset())
+            $(document).mousemove(function (e) {
+                console.log(e)
+                if (isMove) {
+                    var obj = $(moveDiv);
+                    obj.css({"left":e.pageX - div_x, "top":e.pageY - div_y});
+                }
+            }).mouseup(
+                function () {
+                    isMove = false;
+                });
+        });
+
+    }
+</script>
+
+
+</body>
+</html>

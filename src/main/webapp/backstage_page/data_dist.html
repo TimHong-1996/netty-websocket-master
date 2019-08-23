@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>成交记录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">
+
+	</script>
+	
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        
+        
+
+        
+
+        <!-- Panel Other -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>成交记录</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example" id="tableData">
+                                <div style="margin-bottom:15px;border-bottom:1px solid #E7EAEC;padding-bottom:8px;">
+                                    <form id="searchForm">
+                                        <table>
+                                            <tr>
+                                                <th width="5%">
+                                                    <span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;楼盘</span>
+                                                </th>
+                                                <td width="15%">
+                                                    <input type="customName" class="form-control input-sm" name="dealBuild" id="searchdealBuild" placeholder="请输入">
+                                                </td>
+                                                <th>
+                                                    <span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;排序</span>
+                                                </th>
+                                                <td>
+                                                    <select class="form-control input-sm" name="sort" id="sort">
+                                                        <option value="0">默认</option>
+                                                        <option value="1">成交时间远到近</option>
+                                                        <option value="2">成交时间近到远</option>
+                                                        <option value="3">佣金低到高</option>
+                                                        <option value="4">佣金高到低</option>
+                                                        <option value="5">面积低到高</option>
+                                                        <option value="6">面积高到低</option>
+                                                    </select>
+                                                </td>
+                                                <td colspan="2">
+                                                    <div class="btn-group hidden-xs pull-right" style="margin-top:5px;" id="exampleTableEventsToolbar" role="group">
+                                                        <button type="button" class="btn btn-outline btn-default" onclick="getDealList(1)">
+                                                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                                                            搜索
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <table class="table table-bordered table-hover" 
+								       data-height="400"
+									   style="margin-bottom:0px"
+									   data-mobile-responsive="true">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>客户姓名</th>
+											<th>楼盘</th>
+											<th>佣金</th>
+											<th>面积</th>
+											<th>房号</th>
+											<th>成交日期</th>
+                                            <th>成交人员</th>
+											
+											<th>
+												<div align="center">操作</div>
+											</th>
+                                        </tr>
+                                    </thead>
+									<tbody id="dataList">
+										<tr>
+											<td>1</td>
+											<td>邵先生</td>
+											<td>北海市</td>
+											<td>100元</td>
+											<td>100平方米</td>
+											<td>102</td>
+											<td>优秀</td>
+											<td>张先生</td>
+											<td>xx</td>
+										
+											<td align="center">
+												<div>
+													<a title="修改" data-toggle="modal" data-target="#myModal3" style="color:#CC6600">
+														<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+													</a>
+													&nbsp;&nbsp;
+													<a onclick="isDel();" title="删除" style="color:#CC0000">
+														<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+													</a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+                                </table>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="pull-left" style="margin-top:15px">
+											<p id="listInfo">显示 1 到 10 项，共 57 项</p>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="pull-right">
+											<ul class="pagination" id="page">
+												<li><a>&laquo;</a></li>
+												<li class="active"><a>1</a></li>
+												<li><a>2</a></li>
+												<li><a>3</a></li>
+												<li><a>4</a></li>
+												<li><a>5</a></li>
+												<li class="disabled"><a>&raquo;</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+	
+	<!-- ****************************修改字典框**************************** -->
+	<div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" style="width:400px;margin-top:85px;">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header" style="height:50px;padding-top:15px;">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+					<div class="pull-left"><h4>修改成交记录</h4></div>
+				</div>
+				<div class="modal-body" style="background-color:#fff;padding-bottom:0px;padding-top:10px;">
+					<form id="updateForm">
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >编号</span>
+                                    <input type="text" id="dealId" name="dealId" class="form-control" readonly value="1"/>
+                                </div>
+                            </div>
+							
+							<div class="form-group" style="width:150px">
+                                <div class="input-group input-group-sm">
+                                   
+                                </div>
+                            </div>
+							
+							<div class="form-group" style="width:150px">
+                                
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" >楼盘</span>
+                                <input type="text" class="form-control" name="dealBuild" id="dealBuild" placeholder="楼盘名"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" >成交日期</span>
+                                <input type="date" class="form-control" name="dealDate" id="dealDate"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" >佣金</span>
+                                <input type="text" class="form-control" name="dealCommission" id="dealCommission" placeholder="佣金"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" >面积</span>
+                                <input type="text" class="form-control" name="dealArea" id="dealArea" placeholder="面积"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" >房号</span>
+                                <input type="text" class="form-control" name="dealNum" id="dealNum" placeholder="房号"/>
+                            </div>
+                        </div>
+                            
+                            <div class="form-group form-group-sm">
+                                <input type="button" class="btn btn-warning" id="update_btn" value="修改"/>
+                            </div>
+                            
+                        </form> 
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<!-- ****************************修改字典框结束**************************** -->
+	
+	<!-- ****************************成交记录框**************************** -->
+	<div class="modal inmodal" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" style="width:400px;margin-top:85px;">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header" style="height:50px;padding-top:15px;">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+					<div class="pull-left"><h4>成交记录</h4></div>
+				</div>
+				<div class="modal-body" style="background-color:#fff;padding-bottom:0px;padding-top:10px;">
+					<form>
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >编号</span>
+                                    <input type="text" class="form-control" placeholder="编号" disabled />
+                                </div>
+                            </div>
+							
+							<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >姓名</span>
+                                    <input type="text" class="form-control" placeholder="姓名"/>
+                                </div>
+								
+                            </div>
+							
+							<div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >地址</span>
+                                    <input type="text" class="form-control" placeholder="地址"/>
+                                </div>
+                            </div>
+						    <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >佣金</span>
+                                    <input type="text" class="form-control" placeholder="佣金"/>
+                                </div>
+                            </div>
+						    <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >面积</span>
+                                    <input type="text" class="form-control" placeholder="面积"/>
+                                </div>
+                            </div>
+						    <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >房号</span>
+                                    <input type="text" class="form-control" placeholder="房号"/>
+                                </div>
+                            </div>
+						    <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >业务评价</span>
+                                    <input type="text" class="form-control" placeholder="业务评价"/>
+                                </div>
+                            </div>
+						
+							
+                            <div class="form-group" style="width:150px">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" >是否可编辑</span>
+                                    <select class="form-control">
+                                    	<option>是</option>
+                                        <option>否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group form-group-sm">
+                                <input type="submit" class="btn btn-info" value="保存">
+                            </div>
+                            
+                        </form> 
+				</div>
+			</div>
+		</div>
+	
+	<!-- ****************************成交记录框结束**************************** -->
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!--<script src="js/content.min.js?v=1.0.0"></script>-->
+        <script type="text/javascript" src="js/getrootpath.js"></script>
+        <script src="js/jquery.params.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/demo/bootstrap-table-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+        <script>
+            var id = $.query.get("id");
+            var pageP = 1 ;
+            getDealList(pageP);
+            function getDealList(page) {
+                $.ajax({
+                    url:getRootPath() + "/backstage/selectDealByPage",
+                    data:{
+                        page:page,
+                        size:20,
+                        managerId:id,
+                        dealBuild:$("#searchdealBuild").val(),
+                        sort:$("#sort").val()
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    timeout: 1000,
+//               beforeSend:function(){
+//                   var index = layer.load(1, {
+//                       shade: [0.35,'#052963'], //0.1透明度的白色背景
+//                       time:1000
+//                   });
+//               },
+                    success: function (data) {
+//                        console.log(data.data.list);
+                        if(data.code == 2000){
+                            $("#dataList").html("");
+                            var list = data.data.list;
+                            // layer.msg(data.message);
+                            for(var i = 0 ; i < list.length ; i++){
+                                pageP = page;
+                                var $tr=$("<tr>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealId+"</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td><a href='edit_customer.html?id="+list[i].customDto.customId+"'>"+list[i].customDto.customName+"</a></td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealBuild+"</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealCommission+"元</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealArea+"㎡</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealNum+"</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealDate+"</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].managerDto.managerName+"</td>\n" +
+//                                    "\t\t\t\t\t\t\t\t\t\t\t<td>"+list[i].dealId+"</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t<td align=\"center\">\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t<div>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t<a onclick=\"udpateContact("+list[i].dealId+",'"+list[i].dealBuild+"','"+list[i].dealCommission+"','"+list[i].dealArea+"','"+list[i].dealNum+"','"+list[i].dealDate+"')\" title=\"修改\" data-toggle=\"modal\"  style=\"color:#CC6600\">\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></i>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t&nbsp;&nbsp;\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t<a onclick=\"isDel("+list[i].dealId+");\" title=\"删除\" style=\"color:#CC0000\">\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></i>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+                                    "\t\t\t\t\t\t\t\t\t\t</tr>");
+                                $($tr).appendTo('#dataList').addClass("customList");
+                            }
+                            $("#listInfo").text("显示 "+((data.data.page - 1 )*data.data.size + 1)+" 到 "+(((data.data.page - 1 )*data.data.size)+ list.length)+" 项，共 "+data.data.amount+" 项");
+//                        var strBuffer = [];  //缓冲字符串
+                            var str="";
+                            for(var i = 1 ; i <= parseInt(data.data.maxPage) ;i++){
+                                if( i == 1){
+//                              strBuffer.push("<span class=\"prev\" onclick='getManagerList(1 , "+likeName+")' href=\"\">&lt;&lt;</span>");
+                                    str += "<li><a onclick='getGongKeList("+i+")'>&laquo;</a></li>";
+                                }
+                                if( i == parseInt(data.data.page)){
+//                              strBuffer.push("<span class=\"current\">"+i+"</span>");
+                                    str += "<li class=\"active\"><a>"+i+"</a></li>";
+                                }else{
+//                              strBuffer.push("<span class=\"num\" onclick='getManagerList("+i+" , "+likeName+")' href=\"\">"+i+"</span>");
+                                    str += "<li><a onclick='getGongKeList("+i+")'>"+i+"</a></li>";
+                                }
+                                if(i == parseInt(data.data.maxPage)){
+//                              strBuffer.push("<span class=\"next\" onclick='getManagerList("+data.data.maxPage+" , "+likeName+")'  href=\"\">&gt;&gt;</span>");
+                                    str += "<li><a onclick='getGongKeList("+i+")'>&raquo;</a></li>";
+                                }
+                            }
+//                      str= strBuffer.join();
+//                      str.replace(/","/g,"");
+//                      console.log(str)
+                            $("#page").html(str);
+                            // var pre = parseInt(data.data.page)-1 ;
+                            // var next = parseInt(data.data.page)+1 ;
+                            // if(pre != 0){
+                            // $(".pre").html("<span><a class=\"zzd-btnpage\" title=\"\" onclick='"+(pre == 0 ? 'javascript:layer.msg("已经在第一页")':'getAllUser('+pre+',\"'+likeName+'\")')+"' href=\"javascript:void(0)\">上一页</a></span>");
+                            // }
+                            // if(data.data.page != data.data.maxPage){
+                            // $(".next").html("<span><a class=\"zzd-btnpage\" title=\"\" onclick='"+(data.data.page == data.data.maxPage ? 'javascript:layer.msg("已经在最后一页")' : 'getAllUser('+next+',\"'+likeName+'\")')+"' href=\"javascript:void(0)\">下一页</a></span>");
+                            // }
+                        }else{
+                            // layer.msg(data.message);
+                            $("#tableData").text("暂无数据");
+                        }
+
+                    },
+                    fail: function (err) {
+                        // console.log(err)
+                    }
+                })
+            }
+            $("#update_btn").on("click",function () {
+                $.ajax({
+                    url:getRootPath()+"/backstage/updateDeal",
+                    data:$('#updateForm').serialize(),
+                    type: 'post',
+                    dataType: 'json',
+                    timeout: 1000,
+//                beforeSend:function(){
+//                    var index = layer.load(1, {
+//                        shade: [0.35,'#052963'], //0.1透明度的白色背景
+//                        time:1000
+//                    });
+//                },
+                    success: function (data) {
+                        console.log(data);
+                        if(data.code == 2000){
+                            alert(data.message);
+                            getDealList(pageP);
+                            $("#myModal3").modal("hide");
+                        }else{
+                            alert(data.message);
+                        }
+
+                    },
+                    fail: function (err) {
+                        // console.log(err)
+                    }
+                })
+            })
+            function isDel(id) {
+                swal({title:"您确定要删除这条信息吗",
+                        text:"删除后将无法恢复，请谨慎操作！",
+                        type:"warning",
+                        showCancelButton:true,
+                        confirmButtonColor:"#DD6B55",
+                        confirmButtonText:"确定",
+                        cancelButtonText:"取消",
+                        closeOnConfirm:false,
+                        closeOnCancel:false},
+                    function(isConfirm){
+                        if(isConfirm){
+                            $.ajax({
+                                url:getRootPath()+"/backstage/updateDeal",
+                                data:{
+                                    dealId:id,
+                                    dealDisplay:0,
+                                },
+                                type: 'post',
+                                dataType: 'json',
+                                timeout: 1000,
+                                success: function (data) {
+                                    console.log(data);
+                                    if(data.code == 2000){
+                                        swal("删除成功！","您已经永久删除了这条信息。",
+                                            "success"
+                                        )
+                                        getDealList(pageP);
+                                    }else{
+                                        alert(data.message);
+                                    }
+
+                                },
+                                fail: function (err) {
+                                    // console.log(err)
+                                }
+                            })
+
+                        }else{
+                            swal("已取消",
+                                "您取消了删除操作！","error"
+                            )
+                        }
+                    }
+                )
+            };
+            function udpateContact(id,build,yongjin,mianji,fanghao,riqi){
+//                $("#contact_title1").html("修改交往记录");
+                $("#myModal3").modal("show");
+                $("#dealNum").val(fanghao);
+                $("#dealDate").val(riqi);
+                $("#dealCommission").val(yongjin);
+                $("#dealBuild").val(build);
+                $("#dealArea").val(mianji);
+                $("#dealId").val(id);
+            }
+        </script>
+	
+	
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiding.dao.VisitorMapper">
+  <resultMap id="BaseResultMap" type="com.yiding.pojo.Visitor">
+    <id column="visitor_id" jdbcType="BIGINT" property="visitorId" />
+    <result column="visitor_name" jdbcType="VARCHAR" property="visitorName" />
+    <result column="visitor_phone" jdbcType="VARCHAR" property="visitorPhone" />
+    <result column="visitor_ip" jdbcType="VARCHAR" property="visitorIp" />
+    <result column="visitor_sourse" jdbcType="VARCHAR" property="visitorSourse" />
+    <result column="visitor_keyword" jdbcType="VARCHAR" property="visitorKeyword" />
+    <result column="visitor_province" jdbcType="VARCHAR" property="visitorProvince" />
+    <result column="visitor_city" jdbcType="VARCHAR" property="visitorCity" />
+    <result column="visitor_plat" jdbcType="VARCHAR" property="visitorPlat" />
+    <result column="visitor_system" jdbcType="VARCHAR" property="visitorSystem" />
+    <result column="visitor_remark" jdbcType="VARCHAR" property="visitorRemark" />
+    <result column="visitor_search" jdbcType="VARCHAR" property="visitorSearch" />
+    <result column="visitor_display" jdbcType="TINYINT" property="visitorDisplay" />
+    <result column="visitor_password" jdbcType="VARCHAR" property="visitorPassword" />
+    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
+    <result column="visitor_create_time" jdbcType="TIMESTAMP" property="visitorCreateTime" />
+    <result column="visitor_last_time" jdbcType="TIMESTAMP" property="visitorLastTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    visitor_id, visitor_name, visitor_phone, visitor_ip, visitor_sourse, visitor_keyword, 
+    visitor_province, visitor_city, visitor_plat, visitor_system, visitor_remark, visitor_search, 
+    visitor_display, visitor_password, manager_id, visitor_create_time, visitor_last_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from visitor
+    where visitor_id = #{visitorId,jdbcType=BIGINT} AND visitor_display = 1
+  </select>
+  <select id="selectByIP" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from visitor
+    where visitor_ip = #{visitorIp,jdbcType=VARCHAR} AND visitor_display = 1
+  </select>
+  <select id="getAllTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select
+    COUNT(1)
+    from visitor
+    where visitor_display = 1
+    <if test="xingming != null">
+      AND visitor_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="laiyuan != null">
+      AND visitor_sourse = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng != null">
+      AND visitor_province LIKE #{sheng ,jdbcType=VARCHAR}
+    </if>
+    <if test="shi != null">
+      AND visitor_city LIKE #{shi ,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectAllByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from visitor
+    where visitor_display = 1
+    <if test="xingming != null">
+      AND visitor_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="laiyuan != null">
+      AND visitor_sourse = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng != null">
+      AND visitor_province LIKE #{sheng ,jdbcType=VARCHAR}
+    </if>
+    <if test="shi != null">
+      AND visitor_city LIKE #{shi ,jdbcType=VARCHAR}
+    </if>
+    <choose>
+      <when test="sort==1">
+        ORDER BY visitor_create_time
+      </when>
+      <when test="sort==2">
+        ORDER BY visitor_create_time DESC
+      </when>
+      <when test="sort==3">
+        ORDER BY visitor_last_time
+      </when>
+      <when test="sort==4">
+        ORDER BY visitor_last_time DESC
+      </when>
+      <otherwise>
+        ORDER BY visitor_create_time DESC ,visitor_last_time DESC
+      </otherwise>
+    </choose>
+    limit #{start} , #{size}
+  </select>
+  <select id="getTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select
+    COUNT(1)
+    from visitor v , manager_visitor mv , manager m
+    where v.visitor_id = mv.visitor_id AND m.manager_id = mv.manager_id AND v.visitor_display = 1
+    <if test="managerId != null">
+      AND m.manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+    <if test="xingming != null">
+      AND v.visitor_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="laiyuan != null">
+      AND v.visitor_sourse = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng != null">
+      AND v.visitor_province LIKE #{sheng ,jdbcType=VARCHAR}
+    </if>
+    <if test="shi != null">
+      AND v.visitor_city LIKE #{shi ,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    *
+    from visitor v , manager_visitor mv , manager m
+    where v.visitor_id = mv.visitor_id AND m.manager_id = mv.manager_id AND v.visitor_display = 1
+    <if test="managerId != null">
+      AND m.manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+    <if test="xingming != null">
+      AND v.visitor_name LIKE #{xingming ,jdbcType=VARCHAR}
+    </if>
+    <if test="laiyuan != null">
+      AND v.visitor_sourse = #{laiyuan,jdbcType=VARCHAR}
+    </if>
+    <if test="sheng != null">
+      AND v.visitor_province LIKE #{sheng ,jdbcType=VARCHAR}
+    </if>
+    <if test="shi != null">
+      AND v.visitor_city LIKE #{shi ,jdbcType=VARCHAR}
+    </if>
+    <choose>
+      <when test="sort==1">
+        ORDER BY v.visitor_create_time
+      </when>
+      <when test="sort==2">
+        ORDER BY v.visitor_create_time DESC
+      </when>
+      <when test="sort==3">
+        ORDER BY v.visitor_last_time
+      </when>
+      <when test="sort==4">
+        ORDER BY v.visitor_last_time DESC
+      </when>
+      <otherwise>
+        ORDER BY v.visitor_create_time DESC ,v.visitor_last_time DESC
+      </otherwise>
+    </choose>
+    limit #{start} , #{size}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from visitor
+    where visitor_id = #{visitorId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yiding.pojo.Visitor">
+    insert into visitor (visitor_id, visitor_name, visitor_phone, 
+      visitor_ip, visitor_sourse, visitor_keyword, 
+      visitor_province, visitor_city, visitor_plat, 
+      visitor_system, visitor_remark, visitor_search, 
+      visitor_display, visitor_password, manager_id, 
+      visitor_create_time, visitor_last_time)
+    values (#{visitorId,jdbcType=BIGINT}, #{visitorName,jdbcType=VARCHAR}, #{visitorPhone,jdbcType=VARCHAR}, 
+      #{visitorIp,jdbcType=VARCHAR}, #{visitorSourse,jdbcType=VARCHAR}, #{visitorKeyword,jdbcType=VARCHAR}, 
+      #{visitorProvince,jdbcType=VARCHAR}, #{visitorCity,jdbcType=VARCHAR}, #{visitorPlat,jdbcType=VARCHAR}, 
+      #{visitorSystem,jdbcType=VARCHAR}, #{visitorRemark,jdbcType=VARCHAR}, #{visitorSearch,jdbcType=VARCHAR}, 
+      #{visitorDisplay,jdbcType=TINYINT}, #{visitorPassword,jdbcType=VARCHAR}, #{managerId,jdbcType=BIGINT}, 
+      #{visitorCreateTime,jdbcType=TIMESTAMP}, #{visitorLastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="visitorId" parameterType="com.yiding.pojo.Visitor">
+    insert into visitor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="visitorId != null">
+        visitor_id,
+      </if>
+      <if test="visitorName != null">
+        visitor_name,
+      </if>
+      <if test="visitorPhone != null">
+        visitor_phone,
+      </if>
+      <if test="visitorIp != null">
+        visitor_ip,
+      </if>
+      <if test="visitorSourse != null">
+        visitor_sourse,
+      </if>
+      <if test="visitorKeyword != null">
+        visitor_keyword,
+      </if>
+      <if test="visitorProvince != null">
+        visitor_province,
+      </if>
+      <if test="visitorCity != null">
+        visitor_city,
+      </if>
+      <if test="visitorPlat != null">
+        visitor_plat,
+      </if>
+      <if test="visitorSystem != null">
+        visitor_system,
+      </if>
+      <if test="visitorRemark != null">
+        visitor_remark,
+      </if>
+      <if test="visitorSearch != null">
+        visitor_search,
+      </if>
+      <if test="visitorDisplay != null">
+        visitor_display,
+      </if>
+      <if test="visitorPassword != null">
+        visitor_password,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="visitorCreateTime != null">
+        visitor_create_time,
+      </if>
+      <if test="visitorLastTime != null">
+        visitor_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="visitorId != null">
+        #{visitorId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorName != null">
+        #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null">
+        #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIp != null">
+        #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSourse != null">
+        #{visitorSourse,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorKeyword != null">
+        #{visitorKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorProvince != null">
+        #{visitorProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCity != null">
+        #{visitorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPlat != null">
+        #{visitorPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSystem != null">
+        #{visitorSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorRemark != null">
+        #{visitorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSearch != null">
+        #{visitorSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorDisplay != null">
+        #{visitorDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="visitorPassword != null">
+        #{visitorPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorCreateTime != null">
+        #{visitorCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorLastTime != null">
+        #{visitorLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiding.pojo.Visitor">
+    update visitor
+    <set>
+      <if test="visitorName != null">
+        visitor_name = #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null">
+        visitor_phone = #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIp != null">
+        visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSourse != null">
+        visitor_sourse = #{visitorSourse,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorKeyword != null">
+        visitor_keyword = #{visitorKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorProvince != null">
+        visitor_province = #{visitorProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCity != null">
+        visitor_city = #{visitorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPlat != null">
+        visitor_plat = #{visitorPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSystem != null">
+        visitor_system = #{visitorSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorRemark != null">
+        visitor_remark = #{visitorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorSearch != null">
+        visitor_search = #{visitorSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorDisplay != null">
+        visitor_display = #{visitorDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="visitorPassword != null">
+        visitor_password = #{visitorPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorCreateTime != null">
+        visitor_create_time = #{visitorCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorLastTime != null">
+        visitor_last_time = #{visitorLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where visitor_id = #{visitorId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiding.pojo.Visitor">
+    update visitor
+    set visitor_name = #{visitorName,jdbcType=VARCHAR},
+      visitor_phone = #{visitorPhone,jdbcType=VARCHAR},
+      visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      visitor_sourse = #{visitorSourse,jdbcType=VARCHAR},
+      visitor_keyword = #{visitorKeyword,jdbcType=VARCHAR},
+      visitor_province = #{visitorProvince,jdbcType=VARCHAR},
+      visitor_city = #{visitorCity,jdbcType=VARCHAR},
+      visitor_plat = #{visitorPlat,jdbcType=VARCHAR},
+      visitor_system = #{visitorSystem,jdbcType=VARCHAR},
+      visitor_remark = #{visitorRemark,jdbcType=VARCHAR},
+      visitor_search = #{visitorSearch,jdbcType=VARCHAR},
+      visitor_display = #{visitorDisplay,jdbcType=TINYINT},
+      visitor_password = #{visitorPassword,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      visitor_create_time = #{visitorCreateTime,jdbcType=TIMESTAMP},
+      visitor_last_time = #{visitorLastTime,jdbcType=TIMESTAMP}
+    where visitor_id = #{visitorId,jdbcType=BIGINT}
+  </update>
+</mapper>

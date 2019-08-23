@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+      xmlns:task="http://www.springframework.org/schema/task">
+
+    <task:annotation-driven/>
+    <!-- 自动扫描指定目录，将控制器加载到bean -->
+    <context:component-scan base-package="com.yiding" />
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties,classpath:redis.properties" />
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="maxActive" value="10" />
+        <property name="minIdle" value="5" />
+    </bean>
+    <!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+    <bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/yiding/mapper/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yiding.dao" />
+        <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"></property>
+    </bean>
+
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    <!-- 配置事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 配置事物传播行为 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="select*" read-only="true" />
+            <tx:method name="login*" read-only="true" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="register*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="change*" propagation="REQUIRED" />
+            <tx:method name="reset*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置事物切入点 -->
+    <aop:config>
+        <aop:pointcut expression="execution(* com.yiding.service.*.*(..))" id="pointCut" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut" />
+    </aop:config>
+
+    <!-- 开始声明式事务（事物注解） -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- 扫描关于Netty Websocket的包 -->
+    <context:component-scan base-package="com.yiding.action.websocket"/>
+
+    <!-- 把Netty的一些类服务器注册到Spring，方便处理和扩展 -->
+    <!-- 用于处理客户端连接请求 -->
+    <bean id="bossGroup" class="io.netty.channel.nio.NioEventLoopGroup"/>
+    <!-- 用于处理客户端I/O操作 -->
+    <bean id="workerGroup" class="io.netty.channel.nio.NioEventLoopGroup"/>
+    <!-- 服务器启动引导类 -->
+    <bean id="serverBootstrap" class="io.netty.bootstrap.ServerBootstrap" scope="prototype"/>
+    <!-- 自定义的Netty Websocket服务器 -->
+    <bean id="webSocketServer" class="com.yiding.action.websocket.WebSocketServer">
+        <property name="port" value="3333"/>
+        <property name="childChannelHandler" ref="webSocketChildChannelHandler" />
+    </bean>
+
+</beans>

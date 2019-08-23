@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiding.dao.FollowMapper" >
+  <resultMap id="BaseResultMap" type="com.yiding.pojo.Follow" >
+    <id column="follow_id" property="followId" jdbcType="BIGINT" />
+    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="custom_id" property="customId" jdbcType="BIGINT" />
+    <result column="follow_content" property="followContent" jdbcType="VARCHAR" />
+    <result column="follow_date" property="followDate" jdbcType="TIMESTAMP" />
+    <result column="follow_display" property="followDisplay" jdbcType="TINYINT" />
+    <result column="unname1" property="unname1" jdbcType="VARCHAR" />
+    <result column="unname2" property="unname2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    follow_id, manager_id, custom_id, follow_content, follow_date, follow_display, unname1, 
+    unname2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from follow
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from follow
+    where follow_display = 1
+    <if test="customId!=null">
+      AND custom_id = #{customId,jdbcType=BIGINT}
+    </if>
+    <if test="managerId!=null">
+      AND manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+    ORDER BY  follow_date DESC
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer"  >
+    select
+    COUNT(1)
+    from follow
+    where follow_display = 1
+    <if test="customId!=null">
+      AND custom_id = #{customId,jdbcType=BIGINT}
+    </if>
+    <if test="managerId!=null">
+      AND manager_id = #{managerId,jdbcType=BIGINT}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from follow
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yiding.pojo.Follow" >
+    insert into follow (follow_id, manager_id, custom_id, 
+      follow_content, follow_date, follow_display, 
+      unname1, unname2)
+    values (#{followId,jdbcType=BIGINT}, #{managerId,jdbcType=BIGINT}, #{customId,jdbcType=BIGINT}, 
+      #{followContent,jdbcType=VARCHAR}, #{followDate,jdbcType=TIMESTAMP}, #{followDisplay,jdbcType=TINYINT}, 
+      #{unname1,jdbcType=VARCHAR}, #{unname2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiding.pojo.Follow" >
+    insert into follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        follow_id,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="customId != null" >
+        custom_id,
+      </if>
+      <if test="followContent != null" >
+        follow_content,
+      </if>
+      <if test="followDate != null" >
+        follow_date,
+      </if>
+      <if test="followDisplay != null" >
+        follow_display,
+      </if>
+      <if test="unname1 != null" >
+        unname1,
+      </if>
+      <if test="unname2 != null" >
+        unname2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        #{followId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="customId != null" >
+        #{customId,jdbcType=BIGINT},
+      </if>
+      <if test="followContent != null" >
+        #{followContent,jdbcType=VARCHAR},
+      </if>
+      <if test="followDate != null" >
+        #{followDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followDisplay != null" >
+        #{followDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="unname1 != null" >
+        #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        #{unname2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiding.pojo.Follow" >
+    update follow
+    <set >
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="customId != null" >
+        custom_id = #{customId,jdbcType=BIGINT},
+      </if>
+      <if test="followContent != null" >
+        follow_content = #{followContent,jdbcType=VARCHAR},
+      </if>
+      <if test="followDate != null" >
+        follow_date = #{followDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followDisplay != null" >
+        follow_display = #{followDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="unname1 != null" >
+        unname1 = #{unname1,jdbcType=VARCHAR},
+      </if>
+      <if test="unname2 != null" >
+        unname2 = #{unname2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiding.pojo.Follow" >
+    update follow
+    set manager_id = #{managerId,jdbcType=BIGINT},
+      custom_id = #{customId,jdbcType=BIGINT},
+      follow_content = #{followContent,jdbcType=VARCHAR},
+      follow_date = #{followDate,jdbcType=TIMESTAMP},
+      follow_display = #{followDisplay,jdbcType=TINYINT},
+      unname1 = #{unname1,jdbcType=VARCHAR},
+      unname2 = #{unname2,jdbcType=VARCHAR}
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </update>
+</mapper>

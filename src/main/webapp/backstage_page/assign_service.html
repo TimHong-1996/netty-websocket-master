@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - Bootstrap Table</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		function isDel() {
+			swal({title:"您确定要删除这条信息吗",
+				      text:"删除后将无法恢复，请谨慎操作！",
+					  type:"warning",
+					  showCancelButton:true,
+					  confirmButtonColor:"#DD6B55",
+					  confirmButtonText:"确定",
+					  cancelButtonText:"取消",
+					  closeOnConfirm:false,
+					  closeOnCancel:false},
+					  function(isConfirm){
+						if(isConfirm){
+							swal("删除成功！","您已经永久删除了这条信息。",
+								 "success"
+							)
+						}else{
+							swal("已取消",
+							     "您取消了删除操作！","error"
+							)
+						}
+					}
+				)
+		};
+	</script>
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        
+        <!-- Panel Other -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>服务分配</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    
+
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+								<div style="margin-bottom:15px;border-bottom:1px solid #E7EAEC;padding-bottom:8px;">
+									<table>
+										<tr>
+											<th width="5%">
+												<span style="color:#000">客户</span>
+											</th>
+											<td width="15%">
+												<input type="email" class="form-control input-sm" placeholder="客户">
+											</td>
+											<th width="5%">
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;概要</span>
+											</th>
+											<td  width="15%">
+												<input type="email" class="form-control input-sm" placeholder="概要">
+											</td>
+											<th width="5%">
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;服务类型</span>
+											</th>
+											<td width="15%">
+												<select class="form-control input-sm">
+													<option>全部</option>
+													<option>咨询</option>
+													<option>建议</option>
+													<option>投诉</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<span style="color:#000">创建时间</span>
+											</th>
+											<td>
+												<div class="row">
+													<div class="col-sm-6">
+														<input type="text" class="form-control" placeholder="开始时间">
+													</div>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" placeholder="结束时间">
+													</div>
+												</div>
+											</td>
+											<th>
+												<span style="color:#000">&nbsp;&nbsp;&nbsp;&nbsp;状态</span>
+											</th>
+											<td>
+												<select class="form-control input-sm">
+													<option>全部</option>
+													<option>已处理</option>
+												</select>
+											</td>
+											<td colspan="2">
+												<div class="btn-group hidden-xs pull-right" style="margin-top:5px;" id="exampleTableEventsToolbar" role="group">
+													<button type="button" class="btn btn-outline btn-default">
+														<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+														搜索
+													</button>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+                                <table class="table table-bordered table-hover" 
+								       data-height="400"
+									   style="margin-bottom:0px"
+									   data-mobile-responsive="true">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>客户</th>
+                                            <th>概要</th>
+											<th>服务类型</th>
+											<th>创建人</th>
+											<th>创建时间</th>
+											<th>
+												<div align="center">分配给</div>
+											</th>
+											<th>
+												<div align="center">操作</div>
+											</th>
+                                        </tr>
+                                    </thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>睿智数码</td>
+											<td>采购电脑意向</td>
+											<td>刘先生</td>
+											<td>19902233454</td>
+											<td>小明</td>
+											<td align="center">
+												<div class="row">
+													<div class="col-xs-3">
+													</div>
+													<div class="col-xs-4">
+														<select class="form-control input-sm">
+															<option>请选择</option>
+															<option>小明</option>
+														</select>
+													</div>
+													<div class="col-xs-2">
+														<input type="button" class="btn btn-info btn-sm" value="分配">
+													</div>
+												<div/>
+												
+											</td>
+											<td align="center">
+												<div>
+													<a onclick="isDel();" title="删除" style="color:#CC0000">
+														<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+													</a>
+												</div>
+											</td>
+										</tr>
+										
+										<tr>
+											<td>1</td>
+											<td>睿智数码</td>
+											<td>采购电脑意向</td>
+											<td>刘先生</td>
+											<td>19902233454</td>
+											<td>小明</td>
+											<td align="center">
+												<div class="row">
+													<div class="col-xs-3">
+													</div>
+													<div class="col-xs-4">
+														<select class="form-control input-sm">
+															<option>请选择</option>
+															<option>小明</option>
+														</select>
+													</div>
+													<div class="col-xs-2">
+														<input type="button" class="btn btn-info btn-sm" value="分配">
+													</div>
+												<div/>
+												
+											</td>
+											<td align="center">
+												<div>
+													<a onclick="isDel();" title="删除" style="color:#CC0000">
+														<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+													</a>
+												</div>
+											</td>
+										</tr>
+										
+									</tbody>
+                                </table>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="pull-left" style="margin-top:15px">
+											<p>显示 1 到 10 项，共 57 项</p>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="pull-right">
+											<ul class="pagination">
+												<li><a>&laquo;</a></li>
+												<li class="active"><a>1</a></li>
+												<li><a>2</a></li>
+												<li><a>3</a></li>
+												<li><a>4</a></li>
+												<li><a>5</a></li>
+												<li class="disabled"><a>&raquo;</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/demo/bootstrap-table-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>
